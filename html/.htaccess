@@ -1,0 +1,15 @@
+AddDefaultCharset utf-8
+RewriteEngine on
+RewriteBase /
+
+#Begin using correct subdomain#
+RewriteCond %{http_host} www.whynothttps.eu [NC]
+RewriteRule ^(.*)$ https://whynothttps.eu/$1 [R=301,L]
+#End using correct subdomain#
+
+# Show correct robots.txt files
+RewriteCond %{HTTP_HOST} !^whynothttps\.eu [NC]
+RewriteRule ^robots.txt$ robots_nofollow.txt [NC,L]
+
+RewriteCond %{REQUEST_FILENAME}.html -f
+RewriteRule !.*\.html$ %{REQUEST_FILENAME}.html [L,QSA]
